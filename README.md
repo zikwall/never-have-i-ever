@@ -8,4 +8,4 @@
 
 Home | Todo
 --- | --- |
-<img src="https://psv4.userapi.com/c856220/u146677013/docs/d4/33b281515369/20200618_203426_1.gif" alt="Home"/> | todo
+![Home](screenshots/20200618_203426_1.gif "Home") | todo
