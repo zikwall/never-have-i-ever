@@ -1,16 +1,5 @@
-# never_have_i_ever
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<div align="center">
+  <h1>Never Hate I Ever</h1>
+  <h4>Я Никогда Не</h4>
+  <h5>Я Никогда Не - одна из старейших пьющих игр. Ходят слухи, что даже старые греки играли «Никогда» на своих праздниках. Некоторые люди также сравнивают это с «Правдой или Дерзанием».</h5>
+</div>
