@@ -74,3 +74,13 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  fonts:
+    - family: Soft
+      fonts:
+        - asset: fonts/soft_bold.ttf
+          weight: 800
+    - family: Soup
+      fonts:
+        - asset: fonts/soup_bold.ttf
+          weight: 800
