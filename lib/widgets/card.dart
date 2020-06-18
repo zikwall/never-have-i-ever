@@ -30,6 +30,7 @@ class LevelCard extends StatelessWidget {
               style: TextStyle(
                   fontSize: 72.0,
                   color: color,
+                  fontFamily: "Soft",
                   fontWeight: FontWeight.w800
               ),
             ),
