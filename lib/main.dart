@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:never_have_i_ever/screens/home.dart';
+import 'package:never_have_i_ever/screens/home/home.dart';
 
 void main() {
   runApp(MyApp());
