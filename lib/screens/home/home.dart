@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:never_have_i_ever/screens/_home_sets.dart';
+import 'package:never_have_i_ever/screens/home/_levels.dart';
 import 'package:never_have_i_ever/constants/colors.dart';
 
 class Home extends StatefulWidget {

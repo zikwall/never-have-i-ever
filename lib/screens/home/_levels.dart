@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:never_have_i_ever/widgets/card.dart';
+import 'package:never_have_i_ever/widgets/card/card.dart';
+import 'package:never_have_i_ever/widgets/card/custom_card.dart';
 import 'package:never_have_i_ever/constants/colors.dart';
 
 final HomeLevelsContent = <Widget> [
@@ -23,7 +24,7 @@ final HomeLevelsContent = <Widget> [
     description: 'самые горячие вопросы, которые позволят узнать самые пошлые секреты друзей',
     color:  ColorConstants.AppColors['extreme'],
   )),
-  Center(child: LevelCard(
+  Center(child: CustomLevelCard(
     level: 'custom',
     description: 'начните свою собственную игру. создайте свой набор, добавляйте любые вопросы из любого пакета или же придумывайте новые',
     color:  ColorConstants.AppColors['custom'],
