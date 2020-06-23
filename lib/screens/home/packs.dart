@@ -3,7 +3,7 @@ import 'package:never_have_i_ever/widgets/card/card.dart';
 import 'package:never_have_i_ever/widgets/card/custom_card.dart';
 import 'package:never_have_i_ever/constants/colors.dart';
 
-final HomeLevelsContent = <Widget> [
+final Packs = <Widget> [
   Center(child: LevelCard(
     level: 'easy',
     description: 'легкие и не принужденные вопросы для разогрева',
