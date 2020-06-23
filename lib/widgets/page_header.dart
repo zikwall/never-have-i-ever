@@ -25,10 +25,10 @@ class CardHeader extends StatelessWidget {
           children: <Widget>[
             Icon(Icons.chevron_left, color: Colors.white, size: 45.0),
             Text(
-              'наборы',
+              title,
               style: TextStyle(
                   fontSize: 35.0,
-                  color: Colors.white,
+                  color: color,
                   fontFamily: "Soft",
                   fontWeight: FontWeight.w700
               ),

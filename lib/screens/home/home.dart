@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:never_have_i_ever/screens/home/_levels.dart';
+import 'package:never_have_i_ever/screens/home/packs.dart';
 import 'package:never_have_i_ever/constants/colors.dart';
-import 'package:never_have_i_ever/widgets/card/header.dart';
+import 'package:never_have_i_ever/widgets/page_header.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -15,25 +15,6 @@ class HomeState extends State<Home> {
   PageController pageController;
   Animatable<Color> background;
 
-  final Map<String, ColorTween> LevelColors = {
-    'easy': ColorTween(
-      begin: ColorConstants.AppColors['easy'],
-      end: ColorConstants.AppColors['spicy'],
-    ),
-    'spicy': ColorTween(
-      begin: ColorConstants.AppColors['spicy'],
-      end: ColorConstants.AppColors['hard'],
-    ),
-    'hard': ColorTween(
-      begin: ColorConstants.AppColors['hard'],
-      end: ColorConstants.AppColors['extreme'],
-    ),
-    'extreme': ColorTween(
-      begin:  ColorConstants.AppColors['extreme'],
-      end: ColorConstants.AppColors['custom'],
-    )
-  };
-
   @override
   void initState() {
     _initialize();
@@ -44,19 +25,31 @@ class HomeState extends State<Home> {
     background = TweenSequence<Color>([
       TweenSequenceItem(
         weight: 1.0,
-        tween: LevelColors['easy'],
+        tween: ColorTween(
+          begin: ColorConstants.AppColors['easy'],
+          end: ColorConstants.AppColors['spicy'],
+        ),
       ),
       TweenSequenceItem(
         weight: 1.0,
-        tween: LevelColors['spicy'],
+        tween: ColorTween(
+          begin: ColorConstants.AppColors['spicy'],
+          end: ColorConstants.AppColors['hard'],
+        ),
       ),
       TweenSequenceItem(
         weight: 1.0,
-        tween: LevelColors['hard'],
+        tween: ColorTween(
+          begin: ColorConstants.AppColors['hard'],
+          end: ColorConstants.AppColors['extreme'],
+        ),
       ),
       TweenSequenceItem(
         weight: 1.0,
-        tween: LevelColors['extreme'],
+        tween: ColorTween(
+          begin:  ColorConstants.AppColors['extreme'],
+          end: ColorConstants.AppColors['custom'],
+        ),
       ),
     ]);
     pageController = PageController();
@@ -77,14 +70,15 @@ class HomeState extends State<Home> {
             animation: pageController,
             builder: (context, child) {
               final color = pageController.hasClients ? pageController.page / 4 : .0;
+              final evaluateColor = background.evaluate(AlwaysStoppedAnimation(color));
 
               SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                statusBarColor: background.evaluate(AlwaysStoppedAnimation(color)), // status bar color
+                statusBarColor: evaluateColor, // status bar color
               ));
 
               return DecoratedBox(
                 decoration: BoxDecoration(
-                  color: background.evaluate(AlwaysStoppedAnimation(color)),
+                  color: evaluateColor,
                 ),
                 child: child,
               );
@@ -93,13 +87,13 @@ class HomeState extends State<Home> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   CardHeader(
-                    color: Colors.black,
-                    title: 'Yo'
+                    color: Colors.white,
+                    title: 'пакеты'
                   ),
                   Expanded(
                     child: PageView(
                       controller: pageController,
-                      children: HomeLevelsContent,
+                      children: Packs,
                     ),
                   ),
                 ]
