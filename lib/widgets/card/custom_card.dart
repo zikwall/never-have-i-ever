@@ -20,7 +20,7 @@ class CustomLevelCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.85,
-      height: MediaQuery.of(context).size.width * 1.5,
+      height: MediaQuery.of(context).size.width * 1.6,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),

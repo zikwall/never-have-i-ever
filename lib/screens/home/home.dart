@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:never_have_i_ever/screens/home/_levels.dart';
 import 'package:never_have_i_ever/constants/colors.dart';
+import 'package:never_have_i_ever/widgets/card/header.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -70,29 +71,41 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AnimatedBuilder(
-        animation: pageController,
-        builder: (context, child) {
-          final color = pageController.hasClients ? pageController.page / 4 : .0;
+    return SafeArea(
+      child: Scaffold(
+        body: AnimatedBuilder(
+            animation: pageController,
+            builder: (context, child) {
+              final color = pageController.hasClients ? pageController.page / 4 : .0;
 
-          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-            statusBarColor: background.evaluate(AlwaysStoppedAnimation(color)), // status bar color
-          ));
+              SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                statusBarColor: background.evaluate(AlwaysStoppedAnimation(color)), // status bar color
+              ));
 
-          return DecoratedBox(
-            decoration: BoxDecoration(
-              color: background.evaluate(AlwaysStoppedAnimation(color)),
-            ),
-            child: child,
-          );
-        },
-        child: PageView(
-          controller: pageController,
-          children: HomeLevelsContent
-          ,
+              return DecoratedBox(
+                decoration: BoxDecoration(
+                  color: background.evaluate(AlwaysStoppedAnimation(color)),
+                ),
+                child: child,
+              );
+            },
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  CardHeader(
+                    color: Colors.black,
+                    title: 'Yo'
+                  ),
+                  Expanded(
+                    child: PageView(
+                      controller: pageController,
+                      children: HomeLevelsContent,
+                    ),
+                  ),
+                ]
+            )
         ),
-      ),
+      )
     );
   }
 }
