@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CardTitle extends StatelessWidget {
+class PackBodyTitle extends StatelessWidget {
   final String title;
   final Color color;
 
-  CardTitle({
+  PackBodyTitle({
     @required this.title,
     @required this.color
   });

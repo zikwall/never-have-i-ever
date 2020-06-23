@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CardBottom extends StatelessWidget {
+class PackBodyBottom extends StatelessWidget {
   final Color color;
 
-  CardBottom({
+  PackBodyBottom({
     @required this.color
   });
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CardBody extends StatelessWidget {
+class PackBodyDescription extends StatelessWidget {
   final String text;
   final Color color;
 
-  CardBody({
+  PackBodyDescription({
     @required this.text,
     @required this.color
   });

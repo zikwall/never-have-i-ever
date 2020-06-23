@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:never_have_i_ever/screens/home/packs.dart';
 import 'package:never_have_i_ever/constants/colors.dart';
-import 'package:never_have_i_ever/widgets/page_header.dart';
+import 'package:never_have_i_ever/widgets/app/app_header.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -86,7 +86,7 @@ class HomeState extends State<Home> {
             child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  CardHeader(
+                  AppHeader(
                     color: Colors.white,
                     title: 'пакеты'
                   ),
