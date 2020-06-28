@@ -78,9 +78,9 @@ flutter:
   fonts:
     - family: Soft
       fonts:
-        - asset: fonts/soft_bold.ttf
+        - asset: assets/fonts/soft_bold.ttf
           weight: 800
     - family: Soup
       fonts:
-        - asset: fonts/soup_bold.ttf
+        - asset: assets/fonts/soup_bold.ttf
           weight: 800
