@@ -64,42 +64,43 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: AnimatedBuilder(
-            animation: pageController,
-            builder: (context, child) {
-              final color = pageController.hasClients ? pageController.page / 4 : .0;
-              final evaluateColor = background.evaluate(AlwaysStoppedAnimation(color));
-
-              SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                statusBarColor: evaluateColor, // status bar color
-              ));
-
-              return DecoratedBox(
-                decoration: BoxDecoration(
-                  color: evaluateColor,
-                ),
-                child: child,
-              );
-            },
-            child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  AppHeader(
-                    color: Colors.white,
-                    title: 'пакеты'
-                  ),
-                  Expanded(
-                    child: PageView(
-                      controller: pageController,
-                      children: Packs,
-                    ),
-                  ),
-                ]
-            )
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          systemNavigationBarIconBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.light,
         ),
-      )
+        child: Scaffold(
+          body: AnimatedBuilder(
+              animation: pageController,
+              builder: (context, child) {
+                final color = pageController.hasClients ? pageController.page / 4 : .0;
+                final evaluateColor = background.evaluate(AlwaysStoppedAnimation(color));
+
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: evaluateColor,
+                  ),
+                  child: child,
+                );
+              },
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    AppHeader(
+                        color: Colors.white,
+                        title: 'пакеты'
+                    ),
+                    Expanded(
+                      child: PageView(
+                        controller: pageController,
+                        children: Packs,
+                      ),
+                    ),
+                  ]
+              )
+          ),
+        )
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:never_have_i_ever/transitions/scale_route.dart';
 import 'package:never_have_i_ever/screens/settings/settings.dart';
+import 'package:never_have_i_ever/transitions/pack.dart';
 
 class AppHeader extends StatelessWidget {
   final String title;
@@ -15,12 +16,14 @@ class AppHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+
     return Container(
         alignment: Alignment.topCenter,
         child: Padding(
           padding: EdgeInsets.only(
             left: 0,
-            top: 10,
+            top: 10 + statusBarHeight,
             right: 0,
             bottom: 10,
           ),
@@ -48,7 +51,10 @@ class AppHeader extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                         context,
-                        ScaleRouteTransition(widget: Settings(color: packColor))
+                        PageTransition(
+                          type: PageTransitionType.downToUp,
+                          child: Settings(color: packColor),
+                        )
                     );
                   },
                   child: Icon(Icons.settings, color: Colors.white, size: 25.0)

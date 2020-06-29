@@ -10,13 +10,15 @@ class SettingsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+
     return Container(
       alignment: Alignment.topCenter,
       child:
       Padding(
         padding: EdgeInsets.only(
           left: 0,
-          top: 10,
+          top: 10 + statusBarHeight,
           right: 0,
           bottom: 30,
         ),
