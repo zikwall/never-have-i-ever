@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:never_have_i_ever/transitions/scale_route.dart';
 import 'package:never_have_i_ever/screens/settings/settings.dart';
 import 'package:never_have_i_ever/transitions/pack.dart';
 
