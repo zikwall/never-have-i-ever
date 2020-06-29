@@ -5,12 +5,10 @@ import 'package:never_have_i_ever/transitions/pack.dart';
 class AppHeader extends StatelessWidget {
   final String title;
   final Color color;
-  final Color packColor;
 
   AppHeader({
     @required this.title,
     @required this.color,
-    @required this.packColor
   });
 
   @override
@@ -52,7 +50,7 @@ class AppHeader extends StatelessWidget {
                         context,
                         PageTransition(
                           type: PageTransitionType.downToUp,
-                          child: Settings(color: packColor),
+                          child: Settings(),
                           duration: const Duration(milliseconds: 200)
                         )
                     );

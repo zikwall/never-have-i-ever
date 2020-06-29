@@ -34,12 +34,6 @@ class SettingItem extends StatelessWidget {
 }
 
 class Settings extends StatelessWidget with NavigatorObserver {
-  final Color color;
-
-  Settings({
-    @required this.color,
-  });
-
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -54,7 +48,7 @@ class Settings extends StatelessWidget with NavigatorObserver {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SettingsHeader(color: color),
+              SettingsHeader(),
               Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(
