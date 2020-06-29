@@ -54,6 +54,7 @@ class AppHeader extends StatelessWidget {
                         PageTransition(
                           type: PageTransitionType.downToUp,
                           child: Settings(color: packColor),
+                          duration: const Duration(milliseconds: 200)
                         )
                     );
                   },
