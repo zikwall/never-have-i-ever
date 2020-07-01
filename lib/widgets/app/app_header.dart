@@ -61,9 +61,9 @@ class AppHeader extends StatelessWidget {
                     Navigator.push(
                         context,
                         PageTransition(
-                          type: PageTransitionType.downToUp,
-                          child: Settings(),
-                          duration: const Duration(milliseconds: 200)
+                            type: PageTransitionType.downToUp,
+                            child: Settings(),
+                            duration: const Duration(milliseconds: 200)
                         )
                     );
                   },

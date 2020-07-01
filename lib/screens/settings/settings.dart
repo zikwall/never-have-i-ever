@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:never_have_i_ever/widgets/app/settings_header.dart';
 import 'package:flutter/services.dart';
+import 'package:never_have_i_ever/transitions/pack.dart';
+import 'package:never_have_i_ever/screens/rules/rules.dart';
 
 class SettingItem extends StatelessWidget {
   final String label;
@@ -14,21 +16,25 @@ class SettingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        alignment: Alignment.centerLeft,
+        alignment: Alignment.topLeft,
         padding: EdgeInsets.symmetric(vertical: 8.0),
         child: FlatButton(
             onPressed: () {
               onPressed();
             },
-            child: Text(
-              label,
-              style: TextStyle(
-                  fontSize: 24.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w300
-              ),
+            child: SizedBox(
+                width: double.infinity,
+                child:Text(
+                  label,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontSize: 24.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w300
+                  ),
+                )
             )
-        )
+        ),
     );
   }
 }
@@ -48,7 +54,10 @@ class Settings extends StatelessWidget with NavigatorObserver {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SettingsHeader(),
+              SettingsHeader(
+                title: 'настройки',
+                color: Colors.black,
+              ),
               Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(
@@ -65,9 +74,16 @@ class Settings extends StatelessWidget with NavigatorObserver {
                         {
 
                         }),
-                        SettingItem(label: 'правила', onPressed: () =>
-                        {
-
+                        SettingItem(label: 'правила', onPressed: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  type: PageTransitionType.downToUp,
+                                  child: Rules(),
+                                  duration: const Duration(milliseconds: 200),
+                                  alignment: Alignment(0, 1000)
+                              )
+                          );
                         }),
                         SettingItem(label: 'политика конфиденциальности', onPressed: () =>
                         {

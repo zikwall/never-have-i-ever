@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 class SettingsHeader extends StatelessWidget {
+  final String title;
+  final Color color;
+
+  SettingsHeader({
+    @required this.title,
+    @required this.color,
+  });
+
   @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
@@ -26,10 +34,10 @@ class SettingsHeader extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              'настройки',
+              title,
               style: TextStyle(
                 fontSize: 35.0,
-                color: Colors.black,
+                color: color,
                 fontFamily: "Soft",
                 fontWeight: FontWeight.w700,
               ),
