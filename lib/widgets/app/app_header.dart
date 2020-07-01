@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:never_have_i_ever/screens/settings/settings.dart';
 import 'package:never_have_i_ever/transitions/pack.dart';
+import 'package:never_have_i_ever/widgets/dialog/exit.dart';
 
 class AppHeader extends StatelessWidget {
   final String title;
@@ -10,6 +11,17 @@ class AppHeader extends StatelessWidget {
     @required this.title,
     @required this.color,
   });
+
+  showExitDialog(BuildContext context) {
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AppExitDialog(
+        title: "Куда, куда!?",
+        description: "Ты вот ща серьезно, хочешь выйти?",
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +41,7 @@ class AppHeader extends StatelessWidget {
             children: <Widget>[
               FlatButton(
                   onPressed: () {
-                   // todo
+                    showExitDialog(context);
                   },
                   child: Icon(Icons.chevron_left, color: Colors.white, size: 45.0)
               ),
