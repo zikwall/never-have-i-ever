@@ -1,13 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import "dart:math";
 import 'package:never_have_i_ever/widgets/app/game_header.dart';
+import 'package:never_have_i_ever/questions/index.dart';
+import 'package:never_have_i_ever/tasks/tasks.dart';
 
-class Game extends StatelessWidget {
+class Game extends StatefulWidget {
   final Color color;
+  final String level;
 
   Game({
     @required this.color,
+    @required this.level
   });
+
+  @override
+  _GameState createState() => _GameState();
+}
+
+class _GameState extends State<Game> {
+  String currentQuestion;
+  String currentTask;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (currentQuestion == null) {
+      nextQuestion();
+    }
+
+    if (currentTask == null) {
+      nextTask();
+    }
+  }
+
+  String getRandomQuestion() {
+    final _random = new Random();
+    var element = Questions[widget.level].questions[_random.nextInt(
+        Questions[widget.level].questions.length
+    )];
+    return element;
+  }
+
+  // todo ужно будет отсеивать уже побывавшие вопросы
+  void nextQuestion() {
+    setState(() {
+      currentQuestion = getRandomQuestion();
+    });
+  }
+
+  String getRandomTask() {
+    final _random = new Random();
+    var element = Tasks[_random.nextInt(
+        Tasks.length
+    )];
+    return element;
+  }
+
+  void nextTask() {
+    setState(() {
+      currentTask = getRandomTask();
+    });
+  }
 
   Widget _buildQuestion(context) {
     return Container(
@@ -23,10 +78,10 @@ class Game extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Text(
-            'не курил кальян в своей жизни',
+            "$currentQuestion",
             style: TextStyle(
                 fontSize: 24.0,
-                color: color,
+                color: widget.color,
                 fontWeight: FontWeight.w400
             ),
           ),
@@ -69,7 +124,7 @@ class Game extends StatelessWidget {
             'если да. надо выпить',
             style: TextStyle(
                 fontSize: 20.0,
-                color: color,
+                color: widget.color,
                 fontWeight: FontWeight.w300
             ),
           ),
@@ -97,21 +152,24 @@ class Game extends StatelessWidget {
                   'если нет. выполняй задание:',
                   style: TextStyle(
                       fontSize: 20.0,
-                      color: color,
+                      color: widget.color,
                       fontWeight: FontWeight.w300
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                  child: Text(
-                    'сядь на шпагат или хотя бы попытайся',
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        color: color,
-                        fontWeight: FontWeight.w400
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      "$currentTask",
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          color: widget.color,
+                          fontWeight: FontWeight.w400
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
             )
         ),
@@ -124,7 +182,8 @@ class Game extends StatelessWidget {
       padding: EdgeInsets.only(top: 20.0),
       child: FlatButton(
         onPressed: () {
-
+          nextQuestion();
+          nextTask();
         },
         child: Text(
           'далее',
@@ -147,7 +206,7 @@ class Game extends StatelessWidget {
           statusBarIconBrightness: Brightness.light,
         ),
         child: Scaffold(
-          backgroundColor: color,
+          backgroundColor: widget.color,
           body: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,

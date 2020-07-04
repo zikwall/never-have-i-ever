@@ -79,6 +79,7 @@ class HomeState extends State<Home> {
                   type: PageTransitionType.downToUp,
                   child: Game(
                     color: ColorConstants.AppColors['easy'],
+                    level: 'easy',
                   ),
                   duration: const Duration(milliseconds: 200)
               )
@@ -96,6 +97,7 @@ class HomeState extends State<Home> {
                   type: PageTransitionType.downToUp,
                   child: Game(
                     color: ColorConstants.AppColors['spicy'],
+                    level: 'spicy',
                   ),
                   duration: const Duration(milliseconds: 200)
               )
@@ -113,6 +115,7 @@ class HomeState extends State<Home> {
                   type: PageTransitionType.downToUp,
                   child: Game(
                     color: ColorConstants.AppColors['hard'],
+                    level: 'hard',
                   ),
                   duration: const Duration(milliseconds: 200)
               )
@@ -130,6 +133,7 @@ class HomeState extends State<Home> {
                   type: PageTransitionType.downToUp,
                   child: Game(
                     color: ColorConstants.AppColors['extreme'],
+                    level: 'extreme',
                   ),
                   duration: const Duration(milliseconds: 200)
               )
