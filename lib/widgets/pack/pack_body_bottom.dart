@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class PackBodyBottom extends StatelessWidget {
   final Color color;
+  final Function() onGame;
 
   PackBodyBottom({
-    @required this.color
+    @required this.color,
+    @required this.onGame
   });
 
   showAlertDialog(BuildContext context) {
@@ -44,7 +46,7 @@ class PackBodyBottom extends StatelessWidget {
             child:
             FlatButton(
               onPressed: () {
-                showAlertDialog(context);
+                onGame();
               },
               child: Text(
                 'начать',

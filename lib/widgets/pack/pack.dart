@@ -5,9 +5,11 @@ class AppPack extends StatelessWidget {
   AppPack({
     @required this.level,
     @required this.description,
-    @required this.color
+    @required this.color,
+    @required this.onGame
   });
 
+  final Function() onGame;
   final String level;
   final String description;
   final Color color;
@@ -26,7 +28,8 @@ class AppPack extends StatelessWidget {
         child: PackContent(
             level: level,
             description: description,
-            color: color
+            color: color,
+            onGame: onGame,
         )
       ),
     );
