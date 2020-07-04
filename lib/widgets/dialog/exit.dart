@@ -14,7 +14,7 @@ class AppExitDialog extends StatelessWidget {
     Widget yes = FlatButton(
       child: Text("Выйти",
         style: TextStyle(
-          fontFamily: "Soup",
+            color: Colors.red
         ),
       ),
       onPressed: () {
@@ -25,7 +25,7 @@ class AppExitDialog extends StatelessWidget {
     Widget no = FlatButton(
       child: Text("Остаться :)",
         style: TextStyle(
-          fontFamily: "Soup",
+            color: Colors.red
         ),
       ),
       onPressed: () {
@@ -55,7 +55,6 @@ class AppExitDialog extends StatelessWidget {
             style: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.w700,
-              fontFamily: "Soft",
             ),
           ),
           SizedBox(height: 16.0),
@@ -64,7 +63,6 @@ class AppExitDialog extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16.0,
-              fontFamily: "Soup",
             ),
           ),
           SizedBox(height: 24.0),
