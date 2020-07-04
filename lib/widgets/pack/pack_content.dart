@@ -7,9 +7,11 @@ class PackContent extends StatelessWidget {
   PackContent({
     @required this.level,
     @required this.description,
-    @required this.color
+    @required this.color,
+    @required this.onGame
   });
 
+  final Function() onGame;
   final String level;
   final String description;
   final Color color;
@@ -34,7 +36,7 @@ class PackContent extends StatelessWidget {
         ),
         Align(
             alignment: Alignment.bottomCenter,
-            child: PackBodyBottom(color: color)
+            child: PackBodyBottom(color: color, onGame: onGame)
         ),
       ],
     );

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:never_have_i_ever/screens/home/packs.dart';
+import 'package:never_have_i_ever/widgets/pack/pack.dart';
+import 'package:never_have_i_ever/widgets/pack/pack_custom.dart';
 import 'package:never_have_i_ever/constants/colors.dart';
 import 'package:never_have_i_ever/widgets/app/app_header.dart';
+import 'package:never_have_i_ever/transitions/pack.dart';
+import 'package:never_have_i_ever/screens/game/game.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -64,6 +67,82 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final Packs = <Widget> [
+      Center(child: AppPack(
+        level: 'easy',
+        description: 'легкие и не принужденные вопросы для разогрева',
+        color: ColorConstants.AppColors['easy'],
+        onGame: () {
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.downToUp,
+                  child: Game(
+                    color: ColorConstants.AppColors['easy'],
+                  ),
+                  duration: const Duration(milliseconds: 200)
+              )
+          );
+        },
+      )),
+      Center(child: AppPack(
+        level: 'spicy',
+        description: 'становится интересней. более откровенные вопросы, которые помогут узнать друзей еще лучше',
+        color: ColorConstants.AppColors['spicy'],
+        onGame: () {
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.downToUp,
+                  child: Game(
+                    color: ColorConstants.AppColors['spicy'],
+                  ),
+                  duration: const Duration(milliseconds: 200)
+              )
+          );
+        },
+      )),
+      Center(child: AppPack(
+        level: 'hard',
+        description: 'начинается жара. откровенные вопросы, которые заставят покраснеть не один раз',
+        color:  ColorConstants.AppColors['hard'],
+        onGame: () {
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.downToUp,
+                  child: Game(
+                    color: ColorConstants.AppColors['hard'],
+                  ),
+                  duration: const Duration(milliseconds: 200)
+              )
+          );
+        },
+      )),
+      Center(child: AppPack(
+        level: 'extreme',
+        description: 'самые горячие вопросы, которые позволят узнать самые пошлые секреты друзей',
+        color:  ColorConstants.AppColors['extreme'],
+        onGame: () {
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.downToUp,
+                  child: Game(
+                    color: ColorConstants.AppColors['extreme'],
+                  ),
+                  duration: const Duration(milliseconds: 200)
+              )
+          );
+        },
+      )),
+      Center(child: AppPackCustom(
+        level: 'custom',
+        description: 'начните свою собственную игру. создайте свой набор, добавляйте любые вопросы из любого пакета или же придумывайте новые',
+        color:  ColorConstants.AppColors['custom'],
+      )),
+    ];
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
