@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import "dart:math";
 import 'package:never_have_i_ever/widgets/app/game_header.dart';
 import 'package:never_have_i_ever/questions/index.dart';
-import 'package:never_have_i_ever/tasks/tasks.dart';
 
 class Game extends StatefulWidget {
   final Color color;
@@ -20,7 +19,6 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> with SingleTickerProviderStateMixin {
   String currentQuestion;
-  String currentTask;
 
   AnimationController _controller;
   Animation<Offset> _offsetAnimation;
@@ -46,25 +44,16 @@ class _GameState extends State<Game> with SingleTickerProviderStateMixin {
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        setState(() {
-          currentQuestion = getRandomQuestion();
-        });
-
-        //timer.cancel();
+        setQuestion();
+        // card come in back
         _controller.reverse();
-      }
-      else if (status == AnimationStatus.dismissed) {
+      } else if (status == AnimationStatus.dismissed) {
         // do stuff
       }
     });
 
-    setState(() {
-      currentQuestion = getRandomQuestion();
-    });
-
-    if (currentTask == null) {
-      nextTask();
-    }
+    // first initial question
+    setQuestion();
   }
 
   @override
@@ -81,22 +70,14 @@ class _GameState extends State<Game> with SingleTickerProviderStateMixin {
     return element;
   }
 
+  void setQuestion() {
+    setState(() {
+      currentQuestion = getRandomQuestion();
+    });
+  }
+
   void nextQuestion() {
     _controller.forward();
-  }
-
-  String getRandomTask() {
-    final _random = new Random();
-    var element = Tasks[_random.nextInt(
-        Tasks.length
-    )];
-    return element;
-  }
-
-  void nextTask() {
-    setState(() {
-      currentTask = getRandomTask();
-    });
   }
 
   Widget _buildQuestion(context) {
@@ -174,6 +155,7 @@ class _GameState extends State<Game> with SingleTickerProviderStateMixin {
     );
   }
 
+  // todo deprecated, delete
   Widget _buildTask(context) {
     return Container(
       padding: EdgeInsets.only(top: 10.0),
@@ -202,7 +184,7 @@ class _GameState extends State<Game> with SingleTickerProviderStateMixin {
                   child: Padding(
                     padding: EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "$currentTask",
+                      "TASK_HERE",
                       style: TextStyle(
                           fontSize: 20.0,
                           color: widget.color,
@@ -224,7 +206,6 @@ class _GameState extends State<Game> with SingleTickerProviderStateMixin {
       child: FlatButton(
         onPressed: () {
           nextQuestion();
-          nextTask();
         },
         child: Text(
           'далее',
