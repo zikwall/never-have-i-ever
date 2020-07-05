@@ -19,6 +19,8 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> with SingleTickerProviderStateMixin {
   String currentQuestion;
+  List<String> ShuffleQuestions;
+  int currentQuestionIndex;
 
   AnimationController _controller;
   Animation<Offset> _offsetAnimation;
@@ -52,6 +54,8 @@ class _GameState extends State<Game> with SingleTickerProviderStateMixin {
       }
     });
 
+    // set randomize questions list
+    setShuffleQuestions();
     // first initial question
     setQuestion();
   }
@@ -62,17 +66,22 @@ class _GameState extends State<Game> with SingleTickerProviderStateMixin {
     _controller.dispose();
   }
 
-  String getRandomQuestion() {
-    final _random = new Random();
-    var element = Questions[widget.level].questions[_random.nextInt(
-        Questions[widget.level].questions.length
-    )];
-    return element;
+  void setShuffleQuestions() {
+    setState(() {
+      ShuffleQuestions = Questions[widget.level].questions..shuffle();
+      currentQuestionIndex = 0;
+    });
   }
 
   void setQuestion() {
     setState(() {
-      currentQuestion = getRandomQuestion();
+      // new loop
+      if (currentQuestionIndex >= ShuffleQuestions.length) {
+        currentQuestionIndex = 0;
+      }
+
+      currentQuestion = ShuffleQuestions[currentQuestionIndex];
+      currentQuestionIndex++;
     });
   }
 
@@ -129,6 +138,7 @@ class _GameState extends State<Game> with SingleTickerProviderStateMixin {
     );
   }
 
+  // todo deprecated, delete
   Widget _buildDrink(context) {
     return Container(
       padding: EdgeInsets.only(top: 10.0),
