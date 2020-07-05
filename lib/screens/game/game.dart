@@ -66,9 +66,9 @@ class _GameState extends State<Game> {
 
   Widget _buildQuestion(context) {
     return Container(
-      padding: EdgeInsets.only(bottom: 60.0),
+      padding: EdgeInsets.only(bottom: 20.0),
       width: MediaQuery.of(context).size.width * 0.85,
-      height: MediaQuery.of(context).size.width - 140,
+      height: MediaQuery.of(context).size.width * 1.2,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -76,15 +76,18 @@ class _GameState extends State<Game> {
         color: Colors.white,
         elevation: 0,
         child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(
-            "$currentQuestion",
-            style: TextStyle(
-                fontSize: 24.0,
-                color: widget.color,
-                fontWeight: FontWeight.w400
-            ),
-          ),
+            padding: EdgeInsets.all(16.0),
+            child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "$currentQuestion",
+                  style: TextStyle(
+                      fontSize: 28.0,
+                      color: widget.color,
+                      fontWeight: FontWeight.w600
+                  ),
+                )
+            )
         ),
       ),
     );
@@ -96,11 +99,11 @@ class _GameState extends State<Game> {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          'я никогда не: _____________',
+          'я никогда не _______________.',
           style: TextStyle(
-              fontSize: 24.0,
+              fontSize: 40.0,
               color: Colors.white,
-              fontWeight: FontWeight.w300
+              fontWeight: FontWeight.w700
           ),
         ),
       ),
@@ -179,7 +182,7 @@ class _GameState extends State<Game> {
 
   Widget _buildNextButton() {
     return Padding(
-      padding: EdgeInsets.only(top: 20.0),
+      padding: EdgeInsets.only(bottom: 25.0),
       child: FlatButton(
         onPressed: () {
           nextQuestion();
@@ -206,31 +209,30 @@ class _GameState extends State<Game> {
           statusBarIconBrightness: Brightness.light,
         ),
         child: Scaffold(
-          backgroundColor: widget.color,
-          body: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              GameHeader(color: Colors.white, title: "игра"),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: 25.0,
-                    right: 25.0,
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      _buildNeverHaveIEver(),
-                      _buildQuestion(context),
-                      _buildDrink(context),
-                      _buildTask(context),
-                      _buildNextButton()
-                    ],
+            backgroundColor: widget.color,
+            body: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  GameHeader(color: Colors.white, title: "игра"),
+                  Expanded(
+                    child: Padding(
+                        padding: EdgeInsets.only(
+                          left: 25.0,
+                          right: 25.0,
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            _buildNeverHaveIEver(),
+                            Spacer(),
+                            _buildQuestion(context),
+                            _buildNextButton()
+                          ],
+                        )
+                    ),
                   )
-                ),
-              )
-            ]
-          )
+                ]
+            )
         )
     );
   }
