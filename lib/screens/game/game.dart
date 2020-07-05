@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import "dart:math";
 import 'package:never_have_i_ever/widgets/app/game_header.dart';
 import 'package:never_have_i_ever/questions/index.dart';
 
