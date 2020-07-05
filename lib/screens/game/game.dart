@@ -21,6 +21,7 @@ class _GameState extends State<Game> with SingleTickerProviderStateMixin {
   String currentQuestion;
   List<String> ShuffleQuestions;
   int currentQuestionIndex;
+  int shuffleQuestionsLength;
 
   AnimationController _controller;
   Animation<Offset> _offsetAnimation;
@@ -70,13 +71,14 @@ class _GameState extends State<Game> with SingleTickerProviderStateMixin {
     setState(() {
       ShuffleQuestions = Questions[widget.level].questions..shuffle();
       currentQuestionIndex = 0;
+      shuffleQuestionsLength = ShuffleQuestions.length;
     });
   }
 
   void setQuestion() {
     setState(() {
       // new loop
-      if (currentQuestionIndex >= ShuffleQuestions.length) {
+      if (currentQuestionIndex >= shuffleQuestionsLength) {
         currentQuestionIndex = 0;
       }
 
@@ -104,16 +106,32 @@ class _GameState extends State<Game> with SingleTickerProviderStateMixin {
           elevation: 0,
           child: Padding(
               padding: EdgeInsets.all(16.0),
-              child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "$currentQuestion",
-                    style: TextStyle(
-                        fontSize: 28.0,
-                        color: widget.color,
-                        fontWeight: FontWeight.w600
-                    ),
+              child: Column(
+                children: <Widget>[
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "$currentQuestion",
+                        style: TextStyle(
+                            fontSize: 28.0,
+                            color: widget.color,
+                            fontWeight: FontWeight.w600
+                        ),
+                      )
+                  ),
+                  const Spacer(),
+                  Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        "$currentQuestionIndex/$shuffleQuestionsLength",
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            color: widget.color,
+                            fontWeight: FontWeight.w600
+                        ),
+                      )
                   )
+                ],
               )
           ),
         ),
