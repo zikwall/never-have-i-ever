@@ -18,21 +18,59 @@ class Game extends StatefulWidget {
   _GameState createState() => _GameState();
 }
 
-class _GameState extends State<Game> {
+class _GameState extends State<Game> with SingleTickerProviderStateMixin {
   String currentQuestion;
   String currentTask;
+
+  AnimationController _controller;
+  Animation<Offset> _offsetAnimation;
 
   @override
   void initState() {
     super.initState();
 
-    if (currentQuestion == null) {
-      nextQuestion();
-    }
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..addListener(() {
+      setState(() {});
+    });
+
+    _offsetAnimation = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(1.5, 0.0),
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.elasticIn,
+    ));
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        setState(() {
+          currentQuestion = getRandomQuestion();
+        });
+
+        //timer.cancel();
+        _controller.reverse();
+      }
+      else if (status == AnimationStatus.dismissed) {
+        // do stuff
+      }
+    });
+
+    setState(() {
+      currentQuestion = getRandomQuestion();
+    });
 
     if (currentTask == null) {
       nextTask();
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   String getRandomQuestion() {
@@ -43,11 +81,8 @@ class _GameState extends State<Game> {
     return element;
   }
 
-  // todo ужно будет отсеивать уже побывавшие вопросы
   void nextQuestion() {
-    setState(() {
-      currentQuestion = getRandomQuestion();
-    });
+    _controller.forward();
   }
 
   String getRandomTask() {
@@ -65,29 +100,32 @@ class _GameState extends State<Game> {
   }
 
   Widget _buildQuestion(context) {
-    return Container(
-      padding: EdgeInsets.only(bottom: 20.0),
-      width: MediaQuery.of(context).size.width * 0.85,
-      height: MediaQuery.of(context).size.width * 1.2,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        color: Colors.white,
-        elevation: 0,
-        child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "$currentQuestion",
-                  style: TextStyle(
-                      fontSize: 28.0,
-                      color: widget.color,
-                      fontWeight: FontWeight.w600
-                  ),
-                )
-            )
+    return SlideTransition(
+      position: _offsetAnimation,
+      child: Container(
+        padding: EdgeInsets.only(bottom: 20.0),
+        width: MediaQuery.of(context).size.width * 0.85,
+        height: MediaQuery.of(context).size.width * 1.2,
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          color: Colors.white,
+          elevation: 0,
+          child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "$currentQuestion",
+                    style: TextStyle(
+                        fontSize: 28.0,
+                        color: widget.color,
+                        fontWeight: FontWeight.w600
+                    ),
+                  )
+              )
+          ),
         ),
       ),
     );
