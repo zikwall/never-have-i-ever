@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import "dart:math";
 import 'package:never_have_i_ever/widgets/app/game_header.dart';
 import 'package:never_have_i_ever/questions/index.dart';
-import 'package:never_have_i_ever/tasks/tasks.dart';
 
 class Game extends StatefulWidget {
   final Color color;
@@ -18,72 +17,122 @@ class Game extends StatefulWidget {
   _GameState createState() => _GameState();
 }
 
-class _GameState extends State<Game> {
+class _GameState extends State<Game> with SingleTickerProviderStateMixin {
   String currentQuestion;
-  String currentTask;
+  List<String> ShuffleQuestions;
+  int currentQuestionIndex;
+  int shuffleQuestionsLength;
+
+  AnimationController _controller;
+  Animation<Offset> _offsetAnimation;
 
   @override
   void initState() {
     super.initState();
 
-    if (currentQuestion == null) {
-      nextQuestion();
-    }
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..addListener(() {
+      setState(() {});
+    });
 
-    if (currentTask == null) {
-      nextTask();
-    }
+    _offsetAnimation = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(1.5, 0.0),
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.elasticIn,
+    ));
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        setQuestion();
+        // card come in back
+        _controller.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        // do stuff
+      }
+    });
+
+    // set randomize questions list
+    setShuffleQuestions();
+    // first initial question
+    setQuestion();
   }
 
-  String getRandomQuestion() {
-    final _random = new Random();
-    var element = Questions[widget.level].questions[_random.nextInt(
-        Questions[widget.level].questions.length
-    )];
-    return element;
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
-  // todo ужно будет отсеивать уже побывавшие вопросы
+  void setShuffleQuestions() {
+    setState(() {
+      ShuffleQuestions = Questions[widget.level].questions..shuffle();
+      currentQuestionIndex = 0;
+      shuffleQuestionsLength = ShuffleQuestions.length;
+    });
+  }
+
+  void setQuestion() {
+    setState(() {
+      // new loop
+      if (currentQuestionIndex >= shuffleQuestionsLength) {
+        currentQuestionIndex = 0;
+      }
+
+      currentQuestion = ShuffleQuestions[currentQuestionIndex];
+      currentQuestionIndex++;
+    });
+  }
+
   void nextQuestion() {
-    setState(() {
-      currentQuestion = getRandomQuestion();
-    });
-  }
-
-  String getRandomTask() {
-    final _random = new Random();
-    var element = Tasks[_random.nextInt(
-        Tasks.length
-    )];
-    return element;
-  }
-
-  void nextTask() {
-    setState(() {
-      currentTask = getRandomTask();
-    });
+    _controller.forward();
   }
 
   Widget _buildQuestion(context) {
-    return Container(
-      padding: EdgeInsets.only(bottom: 60.0),
-      width: MediaQuery.of(context).size.width * 0.85,
-      height: MediaQuery.of(context).size.width - 140,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        color: Colors.white,
-        elevation: 0,
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(
-            "$currentQuestion",
-            style: TextStyle(
-                fontSize: 24.0,
-                color: widget.color,
-                fontWeight: FontWeight.w400
-            ),
+    return SlideTransition(
+      position: _offsetAnimation,
+      child: Container(
+        padding: EdgeInsets.only(bottom: 20.0),
+        width: MediaQuery.of(context).size.width * 0.85,
+        height: MediaQuery.of(context).size.width * 1.2,
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          color: Colors.white,
+          elevation: 0,
+          child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: <Widget>[
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "$currentQuestion",
+                        style: TextStyle(
+                            fontSize: 28.0,
+                            color: widget.color,
+                            fontWeight: FontWeight.w600
+                        ),
+                      )
+                  ),
+                  const Spacer(),
+                  Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        "$currentQuestionIndex/$shuffleQuestionsLength",
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            color: widget.color,
+                            fontWeight: FontWeight.w600
+                        ),
+                      )
+                  )
+                ],
+              )
           ),
         ),
       ),
@@ -96,17 +145,18 @@ class _GameState extends State<Game> {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          'я никогда не: _____________',
+          'я никогда не _______________.',
           style: TextStyle(
-              fontSize: 24.0,
+              fontSize: 40.0,
               color: Colors.white,
-              fontWeight: FontWeight.w300
+              fontWeight: FontWeight.w700
           ),
         ),
       ),
     );
   }
 
+  // todo deprecated, delete
   Widget _buildDrink(context) {
     return Container(
       padding: EdgeInsets.only(top: 10.0),
@@ -133,6 +183,7 @@ class _GameState extends State<Game> {
     );
   }
 
+  // todo deprecated, delete
   Widget _buildTask(context) {
     return Container(
       padding: EdgeInsets.only(top: 10.0),
@@ -161,7 +212,7 @@ class _GameState extends State<Game> {
                   child: Padding(
                     padding: EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "$currentTask",
+                      "TASK_HERE",
                       style: TextStyle(
                           fontSize: 20.0,
                           color: widget.color,
@@ -179,11 +230,10 @@ class _GameState extends State<Game> {
 
   Widget _buildNextButton() {
     return Padding(
-      padding: EdgeInsets.only(top: 20.0),
+      padding: EdgeInsets.only(bottom: 25.0),
       child: FlatButton(
         onPressed: () {
           nextQuestion();
-          nextTask();
         },
         child: Text(
           'далее',
@@ -206,31 +256,30 @@ class _GameState extends State<Game> {
           statusBarIconBrightness: Brightness.light,
         ),
         child: Scaffold(
-          backgroundColor: widget.color,
-          body: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              GameHeader(color: Colors.white, title: "игра"),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: 25.0,
-                    right: 25.0,
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      _buildNeverHaveIEver(),
-                      _buildQuestion(context),
-                      _buildDrink(context),
-                      _buildTask(context),
-                      _buildNextButton()
-                    ],
+            backgroundColor: widget.color,
+            body: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  GameHeader(color: Colors.white, title: "игра"),
+                  Expanded(
+                    child: Padding(
+                        padding: EdgeInsets.only(
+                          left: 25.0,
+                          right: 25.0,
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            _buildNeverHaveIEver(),
+                            Spacer(),
+                            _buildQuestion(context),
+                            _buildNextButton()
+                          ],
+                        )
+                    ),
                   )
-                ),
-              )
-            ]
-          )
+                ]
+            )
         )
     );
   }
