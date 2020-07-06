@@ -81,7 +81,7 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final Packs = <Widget> [
       Center(child: AppPack(
-        level: 'easy',
+        level: 'light',
         description: 'легкие и не принужденные вопросы для разогрева',
         color: ColorConstants.AppColors['easy'],
         onGame: () {
@@ -99,8 +99,8 @@ class HomeState extends State<Home> {
         },
       )),
       Center(child: AppPack(
-        level: 'spicy',
-        description: 'становится интересней. более откровенные вопросы, которые помогут узнать друзей еще лучше',
+        level: 'cool',
+        description: 'обстановка накаляется. вопросы все более откровенные. хотите узнать друзей еще лучше. тогда вам сюда.',
         color: ColorConstants.AppColors['spicy'],
         onGame: () {
           Navigator.push(
@@ -117,7 +117,7 @@ class HomeState extends State<Home> {
         },
       )),
       Center(child: AppPack(
-        level: 'hard',
+        level: 'omg',
         description: 'начинается жара. откровенные вопросы, которые заставят покраснеть не один раз',
         color:  ColorConstants.AppColors['hard'],
         onGame: () {
@@ -135,7 +135,7 @@ class HomeState extends State<Home> {
         },
       )),
       Center(child: AppPack(
-        level: 'extreme',
+        level: 'wtf',
         description: 'самые горячие вопросы, которые позволят узнать самые пошлые секреты друзей',
         color:  ColorConstants.AppColors['extreme'],
         onGame: () {
