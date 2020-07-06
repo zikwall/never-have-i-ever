@@ -10,12 +10,14 @@ class PackContentCustom extends StatelessWidget {
   PackContentCustom({
     @required this.level,
     @required this.description,
-    @required this.color
+    @required this.color,
+    @required this.onGame
   });
 
   final String level;
   final String description;
   final Color color;
+  final Function() onGame;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +75,7 @@ class PackContentCustom extends StatelessWidget {
 
         Align(
             alignment: Alignment.bottomCenter,
-            child: PackBodyBottom(color: color)
+            child: PackBodyBottom(color: color, onGame: onGame)
         ),
       ],
     );

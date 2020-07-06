@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:never_have_i_ever/widgets/dialog/todo.dart';
 
 class GameHeader extends StatelessWidget {
   final String title;
@@ -8,6 +9,17 @@ class GameHeader extends StatelessWidget {
     @required this.title,
     @required this.color,
   });
+
+  showTodoDialog(BuildContext context) {
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AppTodoDialog(
+        title: "Скоро",
+        description: "Вот реально скоро, подожди еще немного)",
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +57,7 @@ class GameHeader extends StatelessWidget {
             const Spacer(),
             FlatButton(
                 onPressed: () {
-
+                  showTodoDialog(context);
                 },
                 child: Icon(Icons.exposure_plus_1, color: color, size: 35.0)
             ),

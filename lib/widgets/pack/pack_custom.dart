@@ -5,9 +5,11 @@ class AppPackCustom extends StatelessWidget {
   AppPackCustom({
     @required this.level,
     @required this.description,
-    @required this.color
+    @required this.color,
+    @required this.onGame
   });
 
+  final Function() onGame;
   final String level;
   final String description;
   final Color color;
@@ -24,9 +26,10 @@ class AppPackCustom extends StatelessWidget {
           color: Colors.white,
           elevation: 0,
           child: PackContentCustom(
-              level: level,
-              description: description,
-              color: color
+            level: level,
+            description: description,
+            color: color,
+            onGame: onGame,
           )
       ),
     );

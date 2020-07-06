@@ -6,6 +6,7 @@ import 'package:never_have_i_ever/constants/colors.dart';
 import 'package:never_have_i_ever/widgets/app/app_header.dart';
 import 'package:never_have_i_ever/transitions/pack.dart';
 import 'package:never_have_i_ever/screens/game/game.dart';
+import 'package:never_have_i_ever/widgets/dialog/todo.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -63,6 +64,17 @@ class HomeState extends State<Home> {
     pageController.dispose();
     _initialize();
     super.reassemble();
+  }
+
+  showTodoDialog(BuildContext context) {
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AppTodoDialog(
+        title: "Скоро",
+        description: "Вот реально скоро, подожди еще немного)",
+      ),
+    );
   }
 
   @override
@@ -144,6 +156,9 @@ class HomeState extends State<Home> {
         level: 'custom',
         description: 'начните свою собственную игру. создайте свой набор, добавляйте любые вопросы из любого пакета или же придумывайте новые',
         color:  ColorConstants.AppColors['custom'],
+        onGame: () {
+          showTodoDialog(context);
+        },
       )),
     ];
 
