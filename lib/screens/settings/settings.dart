@@ -3,6 +3,7 @@ import 'package:never_have_i_ever/widgets/app/settings_header.dart';
 import 'package:flutter/services.dart';
 import 'package:never_have_i_ever/transitions/pack.dart';
 import 'package:never_have_i_ever/screens/rules/rules.dart';
+import 'package:never_have_i_ever/screens/privacy/privacy.dart';
 
 class SettingItem extends StatelessWidget {
   final String label;
@@ -85,9 +86,16 @@ class Settings extends StatelessWidget with NavigatorObserver {
                               )
                           );
                         }),
-                        SettingItem(label: 'политика конфиденциальности', onPressed: () =>
-                        {
-
+                        SettingItem(label: 'политика конфиденциальности', onPressed: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  type: PageTransitionType.downToUp,
+                                  child: Privacy(),
+                                  duration: const Duration(milliseconds: 200),
+                                  alignment: Alignment(0, 1000)
+                              )
+                          );
                         }),
                       ],
                     ),
