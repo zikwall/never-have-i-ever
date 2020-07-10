@@ -5,6 +5,6 @@
   <h5>Я Никогда Не - одна из старейших пьющих игр. Ходят слухи, что даже старые греки играли «Никогда» на своих праздниках. Некоторые люди также сравнивают это с «Правдой или Действием».</h5>
 </div>
 
-### View in Google Play: (https://play.google.com/store/apps/details?id=com.zikwall.never_have_i_ever)[Open Google Play Market Page]
+#### View in Google Play: [Open Google Play Market Page](https://play.google.com/store/apps/details?id=com.zikwall.never_have_i_ever)
 
-### Powered By: (https://play.google.com/store/apps/developer?id=Kapitonov+Andrey)[Kapitonov Andrey]
+#### Powered By: [Kapitonov Andrey](https://play.google.com/store/apps/developer?id=Kapitonov+Andrey)
