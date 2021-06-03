@@ -9,4 +9,4 @@
 
 Home | Todo
 --- | --- |
-![Home](screenshots/20200618_203426_1.gif "Home") | todo
+![Home](screenshoots/20200618_203426_1.gif "Home") | todo
